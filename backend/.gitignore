@@ -1,0 +1,6 @@
+.idea
+.vscode
+**/DC_Store
+
+*.pyc
+__pycache__
