@@ -1,6 +1,8 @@
 from flask import Flask, request
 from flask_socketio import SocketIO, join_room, leave_room, send, emit
 from room import Room
+import random
+import string
 from dictionary import Dictionary
 
 
@@ -9,8 +11,16 @@ app.config['SECRET_KEY'] = 'sample_secret'
 socketio = SocketIO(app, cors_allowed_origins='*')
 
 
+class RoomDictionary:
+    def __init__(self):
+        pass
+
+    def pop_random_word(self):
+        return ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+
+
 rooms = {}
-rooms_names_dict = Dictionary()
+rooms_names_dict = RoomDictionary()
 users_by_sid = {}
 room_by_users = {}
 

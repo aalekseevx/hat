@@ -1,5 +1,4 @@
 import random
-import string
 
 
 class Dictionary:
@@ -8,20 +7,21 @@ class Dictionary:
         with open(filename) as f:
             while True:
                 line = f.readline()
-                if not line: break
+                if not line:
+                    break
                 a = line.split()
                 b = [a]
                 self.dictionary = self.dictionary + b
         self.dictionary = dict(self.dictionary)
 
-    def GetDictForGame(self, numb, complex, variation):
-        inf = max(1, complex - variation)
-        sup = min(100, complex + variation)
+    def get_dict_for_game(self, numb, complexity, variation):
+        inf = max(1, complexity - variation)
+        sup = min(100, complexity + variation)
         good_dict = {}
-        for ke, value in self.dictionary.items():
+        for key, value in self.dictionary.items():
             if int(value) >= inf:
                 if int(value) <= sup:
-                    good_dict.update({ke: value})
+                    good_dict.update({key: value})
                 else:
                     break
         ret_dict = {}
