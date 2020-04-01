@@ -1,6 +1,7 @@
 from dictionary import Dictionary
 from functools import reduce
 from random import shuffle
+import time
 
 word_dictionary = Dictionary("dictionary_ru.txt")
 
@@ -21,11 +22,12 @@ class Room:
         self.queue = None
         self.queue_id = 0
         self.fixed_players = None
+        self.used_dict = {}
 
     def start_game(self, settings: dict):
         self.settings = settings
         self.pool = list(word_dictionary.get_dict_for_game(self.settings['words'], self.settings['difficulty'],
-                                                      self.settings['dispersion']).keys())
+                                                           self.settings['dispersion']).keys())
         self.fixed_players = list(map(lambda x: x[0], filter(lambda x: x[1] == 'online', self.members.items())))
 
         self.queue = []
@@ -52,6 +54,7 @@ class Room:
     def start_round(self):
         self.status = "playing"
         shuffle(self.pool)
+        self.time = time.perf_counter()
 
     def finish_round(self):
         if self.status != 'waiting_round':
@@ -62,6 +65,11 @@ class Room:
         if result == 'correct':
             self.stats[self.queue[self.queue_id][0]][1] += 1
             self.stats[self.queue[self.queue_id][1]][0] += 1
+            if self.pool[1] not in self.used_dict:
+                self.used_dict[self.pool[0]] = ['usr', 0, 0]
+            self.used_dict[self.pool[0]][1] += 1
+            self.used_dict[self.pool[0]][2] = time.perf_counter() - self.time
+            self.used_dict[self.pool[0]][0] = self.queue[self.queue_id][0]
         self.pool = self.pool[1:]
         if not self.pool:
             self.status = 'show_stats'

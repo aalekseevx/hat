@@ -2,7 +2,7 @@ import random
 import string
 
 
-class DictionaryEng():
+class Dictionary:
     def __init__(self, filename):
         self.dictionary = []
         with open(filename, encoding='utf-8') as f:
@@ -14,7 +14,7 @@ class DictionaryEng():
                 self.dictionary = self.dictionary + b
         self.dictionary = dict(self.dictionary)
 
-    def GetDictForGame(self, numb, complex, variation):
+    def get_dict_for_game(self, numb, complex, variation):
         dict_copy = self.dictionary.copy()
         inf = max(1, complex - variation)
         sup = min(100, complex + variation)
@@ -38,12 +38,12 @@ class DictionaryEng():
             ret_dict.update({key: val})
         return ret_dict
 
-    def AddWord(self, word, complexity):
+    def add_word(self, word, complexity):
         complex = min(complexity, 100)
         complex = max(1, complex)
         self.dictionary.update({word: complex})
 
-    def DelWord(self, word):
+    def del_word(self, word):
         if word in self.dictionary:
             self.dictionary.pop(word)
 
@@ -51,7 +51,7 @@ class DictionaryEng():
         return len(self.dictionary)
 
 
-def Singleton(cls):
+def singleton(cls):
     def gg(str):
         instance = {}
 
@@ -65,6 +65,6 @@ def Singleton(cls):
     return gg
 
 
-@Singleton(DictionaryEng)
-def DictionaryRu(str):
-    return DictionaryEng(str)
+@singleton(Dictionary)
+def DictionarySingle(str):
+    return Dictionary(str)
