@@ -1,33 +1,35 @@
 import random
-import string
+from singleton import singleton
 
 
-class Dictionary:
+class DictionaryInstance:
     def __init__(self, filename):
+        self.word_list = []
         self.dictionary = []
-        with open(filename, encoding='utf-8') as f:
+        with open(f"dictionaries_data/{filename}", encoding='utf-8') as f:
             while True:
                 line = f.readline()
-                if not line: break
+                if not line:
+                    break
                 a = line.split()
-                b = [a]
-                self.dictionary = self.dictionary + b
+                self.word_list.append(a[0])
+                self.dictionary = self.dictionary + [a]
         self.dictionary = dict(self.dictionary)
 
-    def get_dict_for_game(self, numb, complex, variation):
+    def get_dict_for_game(self, numb, complexity, variation):
         dict_copy = self.dictionary.copy()
-        inf = max(1, complex - variation)
-        sup = min(100, complex + variation)
+        inf = max(1, complexity - variation)
+        sup = min(100, complexity + variation)
         good_dict = {}
         iter_dict = {}
         while len(good_dict) < numb:
-            for ki in list(iter_dict.keys()):
-                del dict_copy[ki]
+            for key in list(iter_dict.keys()):
+                del dict_copy[key]
             iter_dict = {}
-            for ke, value in dict_copy.items():
+            for key, value in dict_copy.items():
                 if int(value) >= inf:
                     if int(value) <= sup:
-                        iter_dict.update({ke: value})
+                        iter_dict.update({key: value})
             good_dict.update(iter_dict)
             inf = max(inf - 1, 1)
             sup = min(100, sup + 1)
@@ -39,9 +41,9 @@ class Dictionary:
         return ret_dict
 
     def add_word(self, word, complexity):
-        complex = min(complexity, 100)
-        complex = max(1, complex)
-        self.dictionary.update({word: complex})
+        complexity = min(complexity, 100)
+        complexity = max(1, complexity)
+        self.dictionary.update({word: complexity})
 
     def del_word(self, word):
         if word in self.dictionary:
@@ -50,21 +52,12 @@ class Dictionary:
     def __len__(self):
         return len(self.dictionary)
 
-
-def singleton(cls):
-    def gg(str):
-        instance = {}
-
-        def wrap(str):
-            if cls not in instance:
-                instance[cls] = cls(str)
-            return instance[cls]
-
-        return wrap
-
-    return gg
+    def pop_random_word(self):
+        word = random.choice(self.word_list)
+        self.del_word(word)
+        return word
 
 
-@singleton(Dictionary)
-def DictionarySingle(str):
-    return Dictionary(str)
+@singleton(DictionaryInstance)
+class Dictionary:
+    pass

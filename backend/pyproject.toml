@@ -9,6 +9,10 @@ python = "^3.7"
 flask = "^1.1.1"
 flask-socketio = "^4.2.1"
 eventlet = "^0.25.1"
+gunicorn = "^20.0.4"
+loguru = "^0.4.1"
+namelist = "^0.1.0"
+namedlist = "^1.7"
 
 [tool.poetry.dev-dependencies]
 
