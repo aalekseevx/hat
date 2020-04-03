@@ -1,7 +1,8 @@
 from random import shuffle
-from namedlist import namedlist
 
 import config
+from namedlist import namedlist
+
 from statistics import PartyStatistics
 
 PlayingPair = namedlist('PlayingPair', ['explaining_user', 'guessing_user'])
