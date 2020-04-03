@@ -1,9 +1,10 @@
 import random
+from typing import Dict, Any
 from singleton import singleton
 
 
 class DictionaryInstance:
-    def __init__(self, filename):
+    def __init__(self, filename: str) -> object:
         '''generate dictionary from file'''
         self.word_list = []
         self.dictionary = []
@@ -17,7 +18,7 @@ class DictionaryInstance:
                 self.dictionary = self.dictionary + [a]
         self.dictionary = dict(self.dictionary)
 
-    def get_dict_for_game(self, numb, complexity, variation) -> dict:
+    def get_dict_for_game(self, numb: int, complexity: int, variation: int) -> Dict[str, int]:
         '''take words for game based on parameters'''
         dict_copy = self.dictionary.copy()
         inf = max(1, complexity - variation)
@@ -42,13 +43,13 @@ class DictionaryInstance:
             ret_dict.update({key: val})
         return ret_dict
 
-    def add_word(self, word, complexity):
+    def add_word(self, word: str, complexity: int) -> None:
         '''add new word'''
         complexity = min(complexity, 100)
         complexity = max(1, complexity)
         self.dictionary.update({word: complexity})
 
-    def del_word(self, word):
+    def del_word(self, word: str) -> None:
         '''delete given word'''
         if word in self.dictionary:
             self.dictionary.pop(word)
@@ -56,7 +57,7 @@ class DictionaryInstance:
     def __len__(self) -> int:
         return len(self.dictionary)
 
-    def pop_random_word(self):
+    def pop_random_word(self) -> None:
         '''delete random word'''
         word = random.choice(self.word_list)
         self.del_word(word)
