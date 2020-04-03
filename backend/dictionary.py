@@ -3,7 +3,7 @@ from singleton import singleton
 
 
 class DictionaryInstance:
-    def __init__(self, filename) -> 'intialization of dictionary from file':
+    def __init__(self, filename):
         self.word_list = []
         self.dictionary = []
         with open(f"dictionaries_data/{filename}", encoding='utf-8') as f:
@@ -52,7 +52,7 @@ class DictionaryInstance:
     def __len__(self) -> int:
         return len(self.dictionary)
 
-    def pop_random_word(self) -> 'delete 1 random word from dictionary':
+    def pop_random_word(self) -> 'delete 1 random word':
         word = random.choice(self.word_list)
         self.del_word(word)
         return word
