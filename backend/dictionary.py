@@ -4,6 +4,7 @@ from singleton import singleton
 
 class DictionaryInstance:
     def __init__(self, filename):
+        '''generate dictionary from file'''
         self.word_list = []
         self.dictionary = []
         with open(f"dictionaries_data/{filename}", encoding='utf-8') as f:
@@ -16,7 +17,8 @@ class DictionaryInstance:
                 self.dictionary = self.dictionary + [a]
         self.dictionary = dict(self.dictionary)
 
-    def get_dict_for_game(self, numb, complexity, variation):
+    def get_dict_for_game(self, numb, complexity, variation) -> dict:
+        '''take words for game based on parameters'''
         dict_copy = self.dictionary.copy()
         inf = max(1, complexity - variation)
         sup = min(100, complexity + variation)
@@ -41,18 +43,21 @@ class DictionaryInstance:
         return ret_dict
 
     def add_word(self, word, complexity):
+        '''add new word'''
         complexity = min(complexity, 100)
         complexity = max(1, complexity)
         self.dictionary.update({word: complexity})
 
     def del_word(self, word):
+        '''delete given word'''
         if word in self.dictionary:
             self.dictionary.pop(word)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.dictionary)
 
     def pop_random_word(self):
+        '''delete random word'''
         word = random.choice(self.word_list)
         self.del_word(word)
         return word
