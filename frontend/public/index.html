@@ -1,21 +1,49 @@
 <!DOCTYPE html>
 <html lang="us">
 <head>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-162211947-1');
+    </script>
     <meta charset="utf-8">
     <script src="https://kit.fontawesome.com/5a6d480b7c.js" crossorigin="anonymous"></script>
-    <title>MIPT-TP</title>
+    <title>The Hat Online</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162211947-1"></script>
 </head>
 
 <body>
 
 <div class="columns is-mobile is-centered">
-    <div class="column is-half">
-        <div class="box">
-            <i id="sign-out" class="fas fa-sign-out-alt"></i>
+    <div class="column is-fullwidth" style="padding: 50px; ">
+        <div class="box" style="">
+            <button id="sign-out" class="button">
+                <span class="icon is-small">
+                    <i class="fas fa-sign-out-alt"></i>
+                </span>
+            </button>
+            <div class="card disabled" id="info-card" style="padding:10px; float: right; position: absolute; top: 10px; right: 10px; z-index: 1;">
+                <div id="user-info" class="disabled" style="padding: 1px">
+                    <span class="icon is-small">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <span id="user-info-label"></span>
+                </div>
+                <br/>
+                <div id="room-info" class="disabled" style="padding: 3px">
+                    <span class="icon is-small">
+                        <i class="fas fa-home"></i>
+                    </span>
+                    <span id="room-info-label"></span>
+                </div>
+            </div>
             <div class="has-text-centered">
                 <div class="page" id="login-page">
                     <div class="title">
-                        Welcome! Introduce yourself.
+                        Welcome to the Hat! Please, introduce yourself.
                     </div>
                     <div class="field">
                         <div class="control has-icons-left">
@@ -117,13 +145,13 @@
                     <button id="go-round" class="button is-success is-light is-large">Go</button>
                 </div>
                 <div class="page disabled" id="running-round-play">
-                    <span class="player1 tag is-light is-info">
+                    <span class="player1 tag is-light is-info is-large">
                         Aleksandr
                     </span>
-                    <span class="tag is-light">
+                    <span class="tag is-light is-large">
                         explains words to
                     </span>
-                    <span class="player2 tag is-light is-info">
+                    <span class="player2 tag is-light is-info is-large">
                         Dog
                     </span>
                     <br/>
@@ -137,13 +165,13 @@
                     <br/>
 
                     <div class="game-control">
-                    <span id="word" class="tag is-light is-large">
+                    <span id="word" class="main-word tag is-light is-large">
                         авторадио
                     </span>
 
                     <br/>
                     <br/>
-<!--                        <button id="mistake" class="button is-danger is-light">Mistake</button>-->
+                        <button id="mistake" class="button is-danger is-light">Mistake</button>
                         <button id="give-up" class="button is-light">Give up</button>
                         <button id="correct" class="button is-success is-light">Correct</button>
                     </div>
@@ -155,6 +183,7 @@
                                 <th>Player</th>
                                 <th>Guesses</th>
                                 <th>Explanations</th>
+                                <th>Mistakes</th>
                                 <th>Points</th>
                             </tr>
                         </thead>
@@ -163,11 +192,13 @@
                                 <td>Aleksandr</td>
                                 <td>5</td>
                                 <td>7</td>
+                                <td>7</td>
                                 <td>12</td>
                             </tr>
                             <tr>
                                 <td>Dog</td>
                                 <td>7</td>
+                                <td>5</td>
                                 <td>5</td>
                                 <td>12</td>
                             </tr>
@@ -175,7 +206,10 @@
                     </table>
                     <button id="reset_button" class="button is-success is-light">OK</button>
                 </div>
-            </div>
+                <div class="page disabled" id="countdown-page">
+                    <div id="countdown">
+                    </div>
+                </div>
         </div>
         </div>
     </div>
@@ -192,7 +226,16 @@
     }
 
     .disabled {
-        display: none;
+        display: none !important;
+    }
+
+    .main-word {
+        font-size: 50px !important;
+    }
+
+    #countdown-page {
+        display: inline-block;
+        text-align: center;
     }
 
     .online {
@@ -211,5 +254,59 @@
 
     .bar {
         /*transform: rotate(0.5turn);*/
+    }
+
+    /* Countdown */
+    .base-timer {
+        position: relative;
+        width: 300px;
+        height: 300px;
+    }
+
+    .base-timer__svg {
+        transform: scaleX(-1);
+    }
+
+    .base-timer__circle {
+        fill: none;
+        stroke: none;
+    }
+
+    .base-timer__path-elapsed {
+        stroke-width: 7px;
+        stroke: grey;
+    }
+
+    .base-timer__path-remaining {
+        stroke-width: 7px;
+        stroke-linecap: round;
+        transform: rotate(90deg);
+        transform-origin: center;
+        transition: 1s linear all;
+        fill-rule: nonzero;
+        stroke: currentColor;
+    }
+
+    .base-timer__path-remaining.green {
+        color: rgb(65, 184, 131);
+    }
+
+    .base-timer__path-remaining.orange {
+        color: orange;
+    }
+
+    .base-timer__path-remaining.red {
+        color: red;
+    }
+
+    .base-timer__label {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 100px;
     }
 </style>
