@@ -61,8 +61,3 @@ class DictionaryInstance:
 @singleton(DictionaryInstance)
 class Dictionary:
     pass
-
-
-a = Dictionary('dictionary_ru.txt')
-b = Dictionary('dictionary_ru.txt')
-q = 0
