@@ -34,6 +34,7 @@ class PartyStatistics:
         self.words_statistics[word].tries += 1
 
     # Disabled PyProtectedMember inspection, because usage of "_as_dict" function is not discouraged
+    # Underscore is used prevent conflicts with possible field names.
     # noinspection PyProtectedMember
     def get(self) -> Dict[str, Any]:
         """return all available statistics"""
