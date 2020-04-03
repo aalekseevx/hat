@@ -110,6 +110,9 @@ function redraw() {
 }
 
 function tick() {
+    if (current_room['status'] !== 'playing') {
+        clearInterval(interval);
+    }
     let since_round_started = new Date().getTime() - round_started_time;
     $(".bar").attr("value", since_round_started);
     if (since_round_started >= settings['time'] * 1000) {
