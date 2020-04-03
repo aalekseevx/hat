@@ -3,7 +3,7 @@ from singleton import singleton
 
 
 class DictionaryInstance:
-    def __init__(self, filename):
+    def __init__(self, filename) -> 'initialization from file':
         self.word_list = []
         self.dictionary = []
         with open(f"dictionaries_data/{filename}", encoding='utf-8') as f:
