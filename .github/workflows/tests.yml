@@ -15,3 +15,5 @@ jobs:
       - name: Run test suite
         run: |
           docker-compose exec web poetry run pytest
+        env:
+          COMPOSE_INTERACTIVE_NO_CLI: true
