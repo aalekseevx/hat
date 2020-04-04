@@ -1,14 +1,16 @@
 from random import shuffle
-from namedlist import namedlist
 
 import config
+from namedlist import namedlist
+
 from statistics import PartyStatistics
 
 PlayingPair = namedlist('PlayingPair', ['explaining_user', 'guessing_user'])
 
 
 class GameController:
-    def __init__(self):
+    def __init__(self) -> None:
+        """GameController initialization"""
         self.global_statistics = PartyStatistics([], [])
         self.last_statistics = PartyStatistics([], [])
 
@@ -20,7 +22,8 @@ class GameController:
         self.queue = []
         self.queue_id = None
 
-    def start_game_(self, players: list, settings: dict):
+    def start_game_(self, players: list, settings: dict) -> None:
+        """Game start"""
         self.status = 'waiting_round'
         self.players = players
         self.word_dictionary = config.AVAILABLE_DICT[settings['dict']]
@@ -37,16 +40,19 @@ class GameController:
         self.last_statistics = PartyStatistics(players, self.pool)
         self.global_statistics.add_objects(players, self.pool)
 
-    def start_round(self):
+    def start_round(self) -> None:
+        """start new round"""
         self.status = "playing"
         shuffle(self.pool)
 
-    def finish_round(self):
+    def finish_round(self) -> None:
+        """finish round"""
         if self.status != 'waiting_round':
             self.queue_id = (self.queue_id + 1) % len(self.queue)
             self.status = 'waiting_round'
 
-    def remove_word(self, verdict, screen_time):
+    def remove_word(self, verdict: str, screen_time: float) -> None:
+        """remove word and and update statistics"""
         word = self.pool[0]
         self.last_statistics.add_result(self.queue[self.queue_id].explaining_user,
                                         self.queue[self.queue_id].guessing_user, word, verdict, screen_time)
@@ -56,7 +62,8 @@ class GameController:
         if not self.pool:
             self.status = 'show_stats'
 
-    def endgame(self):
+    def endgame(self) -> None:
+        """endgame"""
         self.last_statistics = PartyStatistics([], [])
         self.status = "game_setup"
         self.players = None

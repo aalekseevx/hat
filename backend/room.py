@@ -1,8 +1,10 @@
 from game import GameController
+from typing import Dict, Any, List
 
 
 class Room(GameController):
-    def __init__(self, name: str, username: str, lang: str):
+    def __init__(self, name: str, username: str, lang: str) -> None:
+        """Room initialization """
         super().__init__()
         self.name = name
         self.lang = lang
@@ -10,13 +12,16 @@ class Room(GameController):
             username: "online"
         }
 
-    def online(self):
+    def online(self) -> List[str]:
+        """return online users"""
         return [x[0] for x in self.members.items() if x[1] == 'online']
 
-    def start_game(self, settings: dict):
+    def start_game(self, settings: dict) -> None:
+        """prepare settings and users to start"""
         self.start_game_(self.online(), settings)
 
-    def get_broadcast_data(self):
+    def get_broadcast_data(self) -> Dict[str, Any]:
+        """return all possible data from room"""
         broadcast_keys = [
             'name',
             'lang',
@@ -36,11 +41,14 @@ class Room(GameController):
             }
         }
 
-    def make_offline(self, username):
+    def make_offline(self, username: str) -> None:
+        """make user offline"""
         self.members[username] = "offline"
 
-    def join(self, username):
+    def join(self, username: str) -> None:
+        """user join"""
         self.members[username] = "online"
 
-    def leave(self, username):
+    def leave(self, username: str) -> None:
+        """user leave"""
         self.members[username] = "offline"
