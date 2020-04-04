@@ -1,6 +1,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'production',
@@ -11,16 +12,26 @@ module.exports = {
             use: {
                 loader: 'babel-loader'
             }
-        }]
-    },
-    optimization: {
-        minimizer: [new UglifyJSPlugin({
-            uglifyOptions: {
-                output: {
-                    comments: false //use it for removing comments like "/*! ... */"
-                }
+        },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader'
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            // options...
+                        }
+                    }
+                ]
             }
-        })]
+    ]},
+    optimization: {
+        minimizer: [new TerserPlugin()]
     },
     plugins: [
         new CopyWebpackPlugin([{
@@ -32,6 +43,9 @@ module.exports = {
             filename: 'index.html',
             hash: true,
             minify: false
-        })
+        }),
+        new MiniCssExtractPlugin({
+			filename: 'css/mystyles.css'
+		})
     ]
 };
