@@ -6,8 +6,9 @@ WordInfo = namedlist('WordInfo', ['word', ('screen_time', 0), ('tries', 0), ('mi
 
 class PartyStatistics:
 
-    def add_objects(self, users, words):
-        self.user_statistics.update({user: UserInfo(user, 0, 0, 0, 0) for user in users if user not in self.inside})
+    def add_objects(self, users: list, words: list) -> None:
+        """add users and words"""
+        self.user_statistics.update({user: UserInfo(user=user) for user in users if user not in self.inside})
         self.inside.update(users)
         self.words_statistics.update({word: WordInfo(word=word) for word in words})
 
