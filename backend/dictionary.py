@@ -67,18 +67,3 @@ class DictionaryInstance:
 @singleton(DictionaryInstance)
 class Dictionary:
     pass
-
-
-def func(*args, **kwargs):
-    print(kwargs.items())
-    return 0
-
-
-@singleton(func)
-def new_func():
-    pass
-
-
-a = new_func(3, **{'word': 3})
-b = new_func(3, **{'word': 2})
-v = 0
