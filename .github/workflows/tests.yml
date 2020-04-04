@@ -8,12 +8,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Build the docker-compose
+      - name: Build and start Docker images
         run: docker-compose up --build -d
       - name: Check running containers
         run: docker ps -a
       - name: Run test suite
         run: |
-          docker-compose -T exec web poetry run pytest
+          docker-compose exec -T web poetry run pytest
         env:
           COMPOSE_INTERACTIVE_NO_CLI: true
