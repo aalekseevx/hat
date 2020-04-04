@@ -3,9 +3,9 @@ def singleton(cls):
         instance = {}
 
         def wrap(*args, **kwargs):
-            if cls not in instance:
-                instance[cls] = cls(*args, **kwargs)
-            return instance[cls]
+            if (cls, *args, frozenset(kwargs.items())) not in instance.keys():
+                instance[(cls, *args, frozenset(kwargs.items()))] = cls(*args, **kwargs)
+            return instance[(cls, *args, frozenset(kwargs.items()))]
 
         return wrap
 
