@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  web:
+    image: aalekseevx/hat_backend
+    command: gunicorn main:app
+    expose:
+      - 8000
+  ui:
+    image: aalekseevx/hat_frontend
+    volumes:
+      - type: volume
+        source: static_volume
+        target: /usr/src/frontend/dist
+  nginx:
+    image: aalekseevx/hat_nginx
+    volumes:
+      - type: volume
+        source: static_volume
+        target: /dist
+    ports:
+      - ${port}:80
+    depends_on:
+      - web
+      - ui
+
+volumes:
+  static_volume:
