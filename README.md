@@ -18,7 +18,7 @@ Information, connected to the MIPT Project description is located in [PROJECT.md
 ### CI/CD
 
 ![Online Hat CI Tests](https://github.com/aalekseevx/mipt-tp-game/workflows/Online%20Hat%20CI%20Tests/badge.svg?branch=master)
-
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4dfd3032ac3f42fb9633d42d3f0f6223)](https://www.codacy.com/manual/aalekseevx/mipt-tp-game?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aalekseevx/mipt-tp-game&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/aalekseevx/mipt-tp-game/branch/master/graph/badge.svg)](https://codecov.io/gh/aalekseevx/mipt-tp-game)
 
 
