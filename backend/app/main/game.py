@@ -1,9 +1,8 @@
 from random import shuffle
 
-import config
 from namedlist import namedlist
-
-from statistics import PartyStatistics
+from .statistics import PartyStatistics
+from .config_helper import get_dict_by_name
 
 PlayingPair = namedlist('PlayingPair', ['explaining_user', 'guessing_user'])
 
@@ -26,7 +25,7 @@ class GameController:
         """Game start"""
         self.status = 'waiting_round'
         self.players = players
-        self.word_dictionary = config.AVAILABLE_DICT[settings['dict']]
+        self.word_dictionary = get_dict_by_name(settings['dict'])
         self.settings = settings
         self.pool = list(self.word_dictionary.get_dict_for_game(self.settings['words'], self.settings['difficulty'],
                                                                 self.settings['dispersion']).keys())

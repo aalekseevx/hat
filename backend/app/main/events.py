@@ -1,24 +1,15 @@
-# import logging
-import config
-import sys
-
-from flask import Flask, request
-from flask_socketio import SocketIO, join_room, leave_room, emit
-# from flask.logging import default_handler
-from room import Room
-from dictionary import DictionaryInstance
+from flask import current_app as app
+from .room import Room
+from .config_helper import get_dict_instance_by_lang
 from functools import wraps
 from loguru import logger
-
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = config.SECRET_KEY
-socket_io = SocketIO(app, cors_allowed_origins='*', logger=False)
-
+from flask import request
+from flask_socketio import emit, join_room, leave_room
+from .. import socket_io
 
 rooms = {}
 rooms_names_dict = {
-    lang: DictionaryInstance(config.DEFAULT_DICT[lang]) for lang in config.DEFAULT_DICT
+    lang: get_dict_instance_by_lang(lang) for lang in app.config['DEFAULT_DICT']
 }
 user_by_sid = {}
 room_by_user = {}
@@ -27,6 +18,7 @@ room_by_user = {}
 def updates_state(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
+        logger.info(f"request {args}, {kwargs}")
         try:
             user = user_by_sid[request.sid]
         except KeyError:
@@ -116,7 +108,7 @@ def on_leave(user, room):
 
 @socket_io.on("init")
 @updates_state
-def on_init(user, room, data):
+def on_init(_, room, data):
     room.start_game(data['settings'])
     logger.info(f"User started new game.")
 
@@ -147,38 +139,3 @@ def on_remove_word(_user, room, data):
 def on_endgame(_user, room):
     room.endgame()
     logger.info(f"User ended current game.")
-
-
-@app.route('/')
-def hello_world():
-    return "Hat Backend service is UP."
-
-
-def setup_logger():
-    logger.remove(0)
-    level = 'DEBUG' if config.DEBUG else 'INFO'
-    logger.add(sys.stdout, level=level, backtrace=True, catch=True)
-
-    # # remove flask default log handler
-    # app.logger.removeHandler(default_handler)
-    #
-    # # class for intercept flask logs
-    # class InterceptHandler(logging.Handler):
-    #     def emit(self, record):
-    #         logger.debug(record)
-    #         # Retrieve context where the logging call occurred, this happens to be in the 6th frame upward
-    #         logger_opt = logger.opt(depth=6, exception=record.exc_info)
-    #         logger_opt.log(record.levelno, record.getMessage())
-    #
-    # app.logger.addHandler(InterceptHandler())
-
-    logger.success("Logger was set up.")
-
-
-def main():
-    setup_logger()
-    socket_io.run(app, debug=config.DEBUG)
-
-
-if __name__ == '__main__':
-    main()

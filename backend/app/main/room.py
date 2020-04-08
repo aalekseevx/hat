@@ -1,4 +1,4 @@
-from game import GameController
+from .game import GameController
 from typing import Dict, Any, List
 
 

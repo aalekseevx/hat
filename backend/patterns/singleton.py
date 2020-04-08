@@ -1,5 +1,5 @@
 def singleton(cls):
-    def decorator(new_cls):
+    def decorator(_):
         instance = {}
 
         def wrap(*args, **kwargs):

@@ -1,6 +1,6 @@
 import random
 from typing import Dict, List
-from singleton import singleton
+from patterns.singleton import singleton
 
 
 class SimpleDictionary:
@@ -8,7 +8,7 @@ class SimpleDictionary:
         """SimpleDictionary initialization"""
         self.word_list = []
         if 'filename' in kwargs:
-            with open(f"dictionaries_data/{kwargs['filename']}", encoding='utf-8') as f:
+            with open(kwargs['filename'], encoding='utf-8') as f:
                 while True:
                     line = f.readline()
                     if not line:
@@ -57,7 +57,7 @@ class DictionaryInstance:
         """generate dictionary from file"""
         self.word_list = []
         self.dictionary = []
-        with open(f"dictionaries_data/{filename}", encoding='utf-8') as f:
+        with open(filename, encoding='utf-8') as f:
             while True:
                 line = f.readline()
                 if not line:
