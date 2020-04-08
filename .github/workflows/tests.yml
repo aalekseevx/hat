@@ -32,10 +32,13 @@ jobs:
           poetry_version: 1.0.5
           working_directory: ./backend
           args: install
-        run: |
-          cd backend
-          poetry run task test
-          poetry run task xml-cov
+      - name: Run tests
+        uses: abatilo/actions-poetry@v1.5.0
+          with:
+            python_version: 3.7.0
+            poetry_version: 1.0.5
+            working_directory: ./backend
+            args: run task test
       - name: Uploading coverage
         uses: codecov/codecov-action@v1
         with:
