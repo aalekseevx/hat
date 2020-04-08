@@ -42,7 +42,7 @@ RUN poetry config virtualenvs.create false
 # install dependencies
 COPY poetry.lock pyproject.toml ./
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels gunicorn==${GUNICORN_VERSION}
-RUN poetry install --no-interaction --no-ansi $(test "$DJANGO_ENV" == production && echo "--no-dev")
+RUN poetry install --no-interaction --no-ansi $(test "$FLASK_ENV" == production && echo "--no-dev")
 
 #########
 # FINAL #

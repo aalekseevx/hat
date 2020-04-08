@@ -5,7 +5,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    command: gunicorn main:app
+    command: gunicorn app.wsgi:app
     expose:
       - 8000
     env_file:
