@@ -14,6 +14,7 @@ jobs:
         run: docker ps -a
       - name: Run test suite
         run: |
-          docker-compose exec -T web poetry run pytest
+          poetry config virtualenvs.create false
+          docker-compose exec -T web poetry run task test
         env:
           COMPOSE_INTERACTIVE_NO_CLI: true
