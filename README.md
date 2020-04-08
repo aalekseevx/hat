@@ -1,5 +1,6 @@
 # Hat online
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d0ac77eac8f94e2db2f01a426bb94a00)](https://app.codacy.com/manual/aalekseevx/mipt-tp-game?utm_source=github.com&utm_medium=referral&utm_content=aalekseevx/mipt-tp-game&utm_campaign=Badge_Grade_Dashboard)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 <!-- [![GitHub license](https://img.shields.io/github/license/aalekseevx/mipt-tp-game.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE) -->
 <!-- [![Analytics](https://ga-beacon.appspot.com/UA-38514290-17/github.com/Naereen/badges/README.md)](https://GitHub.com/Naereen/badges/) -->
