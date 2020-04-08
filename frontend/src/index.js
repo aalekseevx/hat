@@ -147,7 +147,8 @@ $("#to-join-button").on("click", function () {
 $("#sign-out").on("click", function () {
     person_data = {
         "username": undefined,
-        "room": undefined
+        "room": undefined,
+        "lang": "eng"
     };
     current_room = {};
     change_page("#login-page");
