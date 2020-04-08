@@ -16,12 +16,16 @@ pytest = "^5.4.1"
 sphinx = "^3.0.0"
 sphinx-rtd-theme = "^0.4.3"
 pprint = "^0.1"
+coverage = "^5.0.4"
+pytest-cov = "^2.8.1"
+coverage-badge = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.2.1"
 
 [tool.taskipy.tasks]
-test = "python3 -m pytest tests/"
+test = "python3 -m coverage run -m pytest tests/ && coverage xml -o cobertura.xml"
+xml-cov = "coverage xml -o cobertura.xml"
 flask = "gunicorn app.wsgi:app"
 
 docs-html = "sphinx-build -b html ../docs/source ../ocs/build/html"
