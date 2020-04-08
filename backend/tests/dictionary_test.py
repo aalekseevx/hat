@@ -1,11 +1,10 @@
-# from dictionary import Dictionary
+import pytest
 
 
-def test_simple():
-    assert 1 == 1
-
-
-# def test_is_singleton():
-#     obj1 = Dictionary("dictionary_sample.txt")
-#     obj2 = Dictionary("dictionary_sample.txt")
-#     assert obj1 is obj2
+@pytest.mark.usefixtures("app")
+def test_is_singleton(app):
+    with app.app_context():
+        from app.main.config_helper import get_dict_by_name
+        obj1 = get_dict_by_name("Sample")
+        obj2 = get_dict_by_name("Sample")
+    assert obj1 is obj2
