@@ -15,9 +15,13 @@ Information, connected to the MIPT Project description is located in [PROJECT.md
 
 ## Status
 
-### GitHub Actions
+### CI/CD
 
 ![Online Hat CI Tests](https://github.com/aalekseevx/mipt-tp-game/workflows/Online%20Hat%20CI%20Tests/badge.svg?branch=master)
+
+[![codecov](https://codecov.io/gh/aalekseevx/mipt-tp-game/branch/master/graph/badge.svg)](https://codecov.io/gh/aalekseevx/mipt-tp-game)
+
+
 
 ### Dockerhub
 
