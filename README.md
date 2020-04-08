@@ -1,7 +1,7 @@
 # Hat online
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
-[![GitHub license](https://img.shields.io/github/license/aalekseevx/mipt-tp-game.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+<!-- [![GitHub license](https://img.shields.io/github/license/aalekseevx/mipt-tp-game.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE) -->
 <!-- [![Analytics](https://ga-beacon.appspot.com/UA-38514290-17/github.com/Naereen/badges/README.md)](https://GitHub.com/Naereen/badges/) -->
 <!-- [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/) -->
 
@@ -23,8 +23,8 @@ Information, connected to the MIPT Project description is located in [PROJECT.md
 
 ### Documentation
 
-<!-- [![Documentation Status](https://readthedocs.org/projects/ansicolortags/badge/?version=latest)](http://ansicolortags.readthedocs.io/?badge=latest) -->
-
+[![Documentation Status](https://readthedocs.org/projects/hat-online/badge/?version=latest)](https://hat-online.readthedocs.io/en/latest/?badge=latest)
+   
 ### Uptime
 
  - Staging
