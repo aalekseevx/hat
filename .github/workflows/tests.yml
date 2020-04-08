@@ -28,21 +28,18 @@ jobs:
       - name: Install
         uses: abatilo/actions-poetry@v1.5.0
         with:
-          python_version: 3.8.0
+          python_version: 3.7.0
           poetry_version: 1.0.5
           working_directory: ./backend
           args: install
-      - name: Run pytest
-        uses: abatilo/actions-poetry@v1.5.0
-        with:
-          python_version: 3.8.0
-          poetry_version: 1.0.5
-          working_directory: ./backend
-          args: run task test
+        run: |
+          cd backend
+          poetry run task test
+          poetry run task xml-cov
       - name: Uploading coverage
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: backend/
+          file: /backend/cobertura.xml
           fail_ci_if_error: true
 
