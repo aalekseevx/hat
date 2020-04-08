@@ -43,6 +43,5 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: /backend/cobertura.xml
           fail_ci_if_error: true
 
