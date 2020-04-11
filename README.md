@@ -23,16 +23,16 @@ Information, connected to the MIPT Project description is located in [PROJECT.md
 
 ## Ultra-Fast deployment
 
-## Part description
+## Components description
 
 ### Backend
 
-Here game logic is described. It is divided on 4 main parts:
+Here game logic is described. It is divided into 4 main parts:
 
-- words controller
-- room settings
-- game controller
 - user statistics controller
+- words controller
+- game controller
+- room controller
 
 Patterns:
 
@@ -40,15 +40,18 @@ Patterns:
 - Decorator
 - Adapter
 
-Languages - Python 3.7
+Stack
+- Python 3.7
+- Flask
+- SocketIO
 
 Status - Ready
 
-Estimated implementation period -- 10.04.2020
+Implementation deadline -- 10.04.2020
 
 ### Frontend
 
-Here Website design and its link with Backend are described. The setup of website based on this [repository](https://github.com/ANVoevodin/pixijs_v5_setup.git)
+Here Website design and its link with Backend are described.
 
 Patterns:
 - Commang
@@ -56,21 +59,25 @@ Patterns:
 - Observer
 
 
-Languages - HTML + CSS + JS
+Stack
+- HTML
+- Bulma / CSS
+- JQuery / JS
 
-Status - Ready
+Status - Ready / Soon will be depracated and replaced with Vue app.
 
-Estimated implementation period -- 10.04.2020 
+Estimated implementation deadline -- 23.04.2020 
 
 ### Tests 
 
 Unit tests for Backend.
 
-Languages - Python 3.7
+Stack
+- Pytest
 
-Status - Ready
+Status - In progress
 
-Estimated implementation period -- 13.04.2020 - 15.04.2020
+Estimated implementation deadline -- 13.04.2020 - 15.04.2020
 
 ## Starting app outside container
 
