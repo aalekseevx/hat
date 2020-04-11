@@ -41,7 +41,9 @@ Patterns:
 - Adapter
 
 Languages - Python 3.7
+
 Status - Ready
+
 Estimated implementation period -- 10.04.2020
 
 ### Frontend
@@ -55,7 +57,9 @@ Patterns:
 
 
 Languages - HTML + CSS + JS
+
 Status - Ready
+
 Estimated implementation period -- 10.04.2020 
 
 ### Tests 
@@ -63,7 +67,9 @@ Estimated implementation period -- 10.04.2020
 Unit tests for Backend.
 
 Languages - Python 3.7
+
 Status - Ready
+
 Estimated implementation period -- 13.04.2020 - 15.04.2020
 
 ## Starting app outside container
