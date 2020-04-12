@@ -11,6 +11,7 @@ class SimpleDictionary:
             with open(kwargs['filename'], encoding='utf-8') as f:
                 while True:
                     line = f.readline()
+                    line = line.rstrip()
                     if not line:
                         break
                     self.word_list.append(line)
@@ -74,6 +75,8 @@ class DictionaryInstance:
         sup = min(100, complexity + variation)
         good_dict = {}
         iter_dict = {}
+        if numb > len(self.word_list):
+            numb = len(self.word_list)
         while len(good_dict) < numb:
             for key in list(iter_dict.keys()):
                 del dict_copy[key]
@@ -102,18 +105,21 @@ class DictionaryInstance:
         """add new word"""
         complexity = min(complexity, 100)
         complexity = max(1, complexity)
+        if word not in self.word_list:
+            self.word_list.append(word)
         self.dictionary.update({word: complexity})
 
     def del_word(self, word: str) -> None:
         """delete given word"""
         if word in self.dictionary:
             self.dictionary.pop(word)
+            self.word_list.remove(word)
 
     def __len__(self) -> int:
         """dictionary size"""
         return len(self.dictionary)
 
-    def pop_random_word(self) -> None:
+    def pop_random_word(self) -> str:
         """delete random word"""
         word = random.choice(self.word_list)
         self.del_word(word)
