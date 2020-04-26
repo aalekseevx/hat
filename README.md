@@ -23,6 +23,62 @@ Information, connected to the MIPT Project description is located in [PROJECT.md
 
 ## Ultra-Fast deployment
 
+## Components description
+
+### Backend
+
+Here game logic is described. It is divided into 4 main parts:
+
+- user statistics controller
+- words controller
+- game controller
+- room controller
+
+Patterns:
+
+- Singleton
+- Decorator
+- Adapter
+
+Stack
+- Python 3.7
+- Flask
+- SocketIO
+
+Status - Ready
+
+Implementation deadline -- 10.04.2020
+
+### Frontend
+
+Here Website design and its link with Backend are described.
+
+Patterns:
+- Commang
+- Chain of Responsibility
+- Observer
+
+
+Stack
+- HTML
+- Bulma / CSS
+- JQuery / JS
+
+Status - Ready / Soon will be depracated and replaced with Vue app.
+
+Estimated implementation deadline -- 23.04.2020 
+
+### Tests 
+
+Unit tests for Backend.
+
+Stack
+- Pytest
+
+Status - In progress
+
+Estimated implementation deadline -- 13.04.2020 - 15.04.2020
+
 ## Starting app outside container
 
 Before running apps, satisfy following dependencies
