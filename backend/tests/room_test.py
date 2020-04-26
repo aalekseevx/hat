@@ -54,4 +54,4 @@ def test_start_game(room):
 
 def test_get_broadcast_data(room):
     data = room.get_broadcast_data()
-    assert len(data) == 11
+    assert len(data) == 11 # number of different info
