@@ -47,7 +47,7 @@ Stack
 
 Status - Ready
 
-Implementation deadline -- 10.04.2020
+Implementation deadline -- 28.04.2020
 
 ### Frontend
 
@@ -66,7 +66,7 @@ Stack
 
 Status - Ready / Soon will be depracated and replaced with Vue app.
 
-Estimated implementation deadline -- 23.04.2020 
+Estimated implementation deadline -- 28.04.2020 
 
 ### Tests 
 
@@ -77,7 +77,7 @@ Stack
 
 Status - In progress
 
-Estimated implementation deadline -- 13.04.2020 - 15.04.2020
+Estimated implementation deadline -- 28.04.2020 - 15.04.2020
 
 ## Starting app outside container
 
@@ -122,6 +122,7 @@ poetry run task test
 - [Bulma](https://github.com/jgthms/bulma)
 
 ## Authors
-
+Alekseev Aleksandr
+Piachonkin Aleksandr
 
 ## Acknowledgments
