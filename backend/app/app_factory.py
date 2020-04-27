@@ -34,11 +34,16 @@ def create_app(test_config=None):
         from .main import main as main_blueprint
         app.register_blueprint(main_blueprint)
 
-    socket_io.init_app(app)
+    socket_io.init_app(app, cors_allowed_origins="*")
 
     def setup_logger():
-        logger.remove(0)
+        nothing_to_remove = False
+        try:
+            logger.remove(0)
+        except ValueError:
+            nothing_to_remove = True
         level = 'DEBUG' if app.config['DEBUG'] else 'INFO'
+        print(level)
         logger.add(sys.stdout, level=level)
 
         class PropagateHandler(logging.Handler):
@@ -51,6 +56,8 @@ def create_app(test_config=None):
         logger.add(f"{app.instance_path}/logs/{app.config['ENV']}.log",
                    rotation=app.config['ROTATION'][app.config['ENV']])
 
+        if nothing_to_remove:
+            logger.warning("No previous logger to remove")
         logger.success("Logger was set up.")
 
     setup_logger()

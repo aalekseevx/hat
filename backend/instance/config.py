@@ -15,3 +15,6 @@ AVAILABLE_DICT = {
     "Sample": "dictionary_ru.txt"
 }
 
+SIMPLE_DICT = {
+    "Sample": "dictionary_sample.txt"
+}
