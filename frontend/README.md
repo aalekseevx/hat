@@ -1,25 +1,24 @@
-## MIPT-TP-Game
+# progressive-frontend
 
-Setup based on [this repo](https://github.com/ANVoevodin/pixijs_v5_setup)
-
-Install dependencies:
+## Project setup
 ```
-npm i
+npm install
 ```
 
-Run on http://localhost:3000:
+### Compiles and hot-reloads for development
 ```
-npm start
+npm run serve
 ```
 
-#### Building
-
-Development build:
+### Compiles and minifies for production
 ```
 npm run build
 ```
 
-Production build:
+### Lints and fixes files
 ```
-npm run production
+npm run lint
 ```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
