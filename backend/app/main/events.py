@@ -3,9 +3,10 @@ from .room import Room
 from .config_helper import get_dict_instance_by_lang
 from functools import wraps
 from loguru import logger
-from flask import request
+from flask import request, jsonify, request
 from flask_socketio import emit, join_room, leave_room
 from .. import socket_io
+from . import main
 
 rooms = {}
 rooms_names_dict = {
@@ -15,44 +16,49 @@ user_by_sid = {}
 room_by_user = {}
 
 
-def updates_state(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        logger.info(f"request {args}, {kwargs}")
-        try:
-            user = user_by_sid[request.sid]
-        except KeyError:
-            logger.error("Unregistered user attempted a request.")
-            return
+def updates_state(disable_broadcast=False):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            logger.info(f"Incoming event {request.event}")
+            logger.info(f"request {args}, {kwargs}")
+            logger.info(f"broadcasting: {not disable_broadcast}")
+            try:
+                user = user_by_sid[request.sid]
+            except KeyError:
+                logger.error("Unregistered user attempted a request.")
+                return
 
-        room = None
-        try:
-            room = rooms[room_by_user[user]]
-        except KeyError:
-            logger.warning(f"User {user} is not associated with any room.")
-
-        if room:
-            logger.info(f"State change request by {user} in room {room.name}.")
-        else:
-            logger.info(f"State change request by {user}.")
-
-        func(user, room, *args, **kwargs)
-
-        if room and len(room.online()) == 0:
-            logger.info(f"Room {room.name} is now empty. Cleaning the trash.")
-            rooms_names_dict[room.lang].add_word(room, 1)
-            rooms[room] = None
-        if not room:
+            room = None
             try:
                 room = rooms[room_by_user[user]]
             except KeyError:
+                logger.warning(f"User {user} is not associated with any room.")
+
+            if room:
+                logger.info(f"State change request by {user} in room {room.name}.")
+            else:
+                logger.info(f"State change request by {user}.")
+
+            func(user, room, *args, **kwargs)
+
+            if room and len(room.online()) == 0:
+                logger.info(f"Room {room.name} is now empty. Cleaning the trash.")
+                rooms_names_dict[room.lang].add_word(room, 1)
+                rooms[room] = None
+            try:
+                new_room = rooms[room_by_user[user]]
+                # If exception is thrown, room is preserved
+                room = new_room
+            except KeyError:
                 logger.warning(f"Could not find associated room even after the state change.")
-        if room:
-            broadcast = room.get_broadcast_data()
-            logger.debug("Broadcasting data...")
-            logger.debug(broadcast)
-            emit('update', broadcast, room=room.name)
-    return wrapper
+            if room and not disable_broadcast:
+                broadcast = room.get_broadcast_data()
+                logger.debug("Broadcasting data...")
+                logger.debug(broadcast)
+                emit('update', broadcast, room=room.name)
+        return wrapper
+    return decorator
 
 
 def register_user(func):
@@ -69,8 +75,15 @@ def on_connect():
     logger.info(f'New connection appeared. SID: {request.sid}')
 
 
+@socket_io.on('signout')
+@updates_state()
+def on_sign_out(user, room):
+    room.leave(user)
+    logger.info('User signed out.')
+
+
 @socket_io.on('disconnect')
-@updates_state
+@updates_state()
 def on_disconnect(user, room):
     room.leave(user)
     logger.info('User disconnected.')
@@ -78,7 +91,7 @@ def on_disconnect(user, room):
 
 @socket_io.on('create')
 @register_user
-@updates_state
+@updates_state()
 def on_create(user, _, data):
     name = rooms_names_dict[data['lang']].pop_random_word()
     rooms[name] = Room(name, user, data['lang'])
@@ -89,7 +102,7 @@ def on_create(user, _, data):
 
 @socket_io.on('join')
 @register_user
-@updates_state
+@updates_state()
 def on_join(user, _, data):
     room = rooms[data['room']]
     room_by_user[user] = room.name
@@ -99,7 +112,7 @@ def on_join(user, _, data):
 
 
 @socket_io.on('leave')
-@updates_state
+@updates_state()
 def on_leave(user, room):
     room.make_offline(user)
     leave_room(room.name)
@@ -107,35 +120,44 @@ def on_leave(user, room):
 
 
 @socket_io.on("init")
-@updates_state
+@updates_state()
 def on_init(_, room, data):
     room.start_game(data['settings'])
     logger.info(f"User started new game.")
 
 
 @socket_io.on("start_round")
-@updates_state
+@updates_state()
 def on_start_round(_user, room):
     room.start_round()
     logger.info(f"User started new round.")
 
 
 @socket_io.on("end_round")
-@updates_state
+@updates_state()
 def on_end_round(_user, room):
     room.finish_round()
     logger.info(f"User finished current round.")
 
 
 @socket_io.on("remove_word")
-@updates_state
+@updates_state()
 def on_remove_word(_user, room, data):
     room.remove_word(data['verdict'], data['screen_time'])
+    if data['finish_round']:
+        room.finish_round()
     logger.info(f"User removed word with result {data['verdict']}. Last screen time {data['screen_time']}.")
 
 
 @socket_io.on("endgame")
-@updates_state
+@updates_state()
 def on_endgame(_user, room):
     room.endgame()
     logger.info(f"User ended current game.")
+
+
+@main.route('/check_existence', methods=['GET'])
+def check_existence():
+    return jsonify({
+        "exists": request.args.get('room') in rooms
+    })

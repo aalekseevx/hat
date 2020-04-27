@@ -25,8 +25,8 @@ taskipy = "^1.2.1"
 
 [tool.taskipy.tasks]
 test = "python3 -m coverage run -m pytest tests/ && coverage xml -o cobertura.xml"
-xml-cov = "coverage xml -o cobertura.xml"
 flask = "gunicorn app.wsgi:app"
+flask_debug = "export FLASK_ENV=development && python3 debug_run.py"
 
 docs-html = "sphinx-build -b html ../docs/source ../ocs/build/html"
 docs-epub = "sphinx-build -b epub ../docs/source ../docs/build/epub"

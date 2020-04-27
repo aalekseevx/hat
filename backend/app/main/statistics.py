@@ -9,7 +9,7 @@ class PartyStatistics:
 
     def add_objects(self, users: list, words: list) -> None:
         """add users and words"""
-        self.user_statistics.update({user: UserInfo(user=user) for user in users if user not in self.inside})
+        self.user_statistics.update({user: UserInfo(username=user) for user in users if user not in self.inside})
         self.inside.update(users)
         self.words_statistics.update({word: WordInfo(word=word) for word in words})
 
