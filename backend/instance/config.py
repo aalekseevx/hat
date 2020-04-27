@@ -22,5 +22,6 @@ AVAILABLE_DICT = {
     },
 }
 
-
-
+SIMPLE_DICT = {
+    "Sample": "dictionary_sample.txt"
+}

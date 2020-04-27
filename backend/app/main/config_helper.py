@@ -1,5 +1,6 @@
 from words_controller.dictionary import Dictionary, DictionaryInstance
 from functools import lru_cache
+from words_controller.dictionary import Dictionary, DictionaryInstance, SimpleDictionary
 from flask import current_app as app
 
 
