@@ -122,8 +122,8 @@ poetry run task test
 - [Bulma](https://github.com/jgthms/bulma)
 
 ## Authors
-#Alekseev Aleksandr
+# Alekseev Aleksandr
 
-#Piachonkin Aleksandr
+# Piachonkin Aleksandr
 
 ## Acknowledgments
