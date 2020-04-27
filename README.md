@@ -77,7 +77,7 @@ Stack
 
 Status - In progress
 
-Estimated implementation deadline -- 28.04.2020 - 15.04.2020
+Estimated implementation deadline -- 28.04.2020
 
 ## Starting app outside container
 
