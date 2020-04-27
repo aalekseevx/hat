@@ -64,7 +64,7 @@ Stack
 - Bulma / CSS
 - JQuery / JS
 
-Status - Ready / Soon will be depracated and replaced with Vue app.
+Status - Ready 
 
 Estimated implementation deadline -- 28.04.2020 
 
@@ -75,7 +75,7 @@ Unit tests for Backend.
 Stack
 - Pytest
 
-Status - In progress
+Status - Ready
 
 Estimated implementation deadline -- 28.04.2020
 
