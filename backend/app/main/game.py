@@ -2,7 +2,7 @@ from random import shuffle
 
 from namedlist import namedlist
 from .statistics import PartyStatistics
-from .config_helper import get_dict_by_name
+from .config_helper import get_dict_by_name, get_simple_dict
 
 PlayingPair = namedlist('PlayingPair', ['explaining_user', 'guessing_user'])
 
@@ -27,8 +27,7 @@ class GameController:
         self.players = players
         self.word_dictionary = get_dict_by_name(settings['dict'])
         self.settings = settings
-        self.pool = list(self.word_dictionary.get_dict_for_game(self.settings['words'], self.settings['difficulty'],
-                                                                self.settings['dispersion']).keys())
+        self.pool = get_simple_dict(settings['dict'], settings['difficulty']).get_dict_for_game(settings['words'] * len(players))
 
         self.queue = []
         for delta in range(1, len(self.players)):
@@ -57,13 +56,15 @@ class GameController:
                                         self.queue[self.queue_id].guessing_user, word, verdict, screen_time)
         self.global_statistics.add_result(self.queue[self.queue_id].explaining_user,
                                           self.queue[self.queue_id].guessing_user, word, verdict, screen_time)
-        self.pool = self.pool[1:]
+        if verdict != 'timeout':
+            self.pool = self.pool[1:]
+        if verdict in ['mistake', 'timeout']:
+            self.finish_round()
         if not self.pool:
-            self.status = 'show_stats'
+            self.endgame()
 
     def endgame(self) -> None:
         """endgame"""
-        self.last_statistics = PartyStatistics([], [])
         self.status = "game_setup"
         self.players = None
         self.word_dictionary = None

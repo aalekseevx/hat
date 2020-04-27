@@ -6,13 +6,20 @@ ROTATION = {
 }
 
 DEFAULT_DICT = {
-    "rus": "dictionary_ru.txt",
-    "eng": "dictionary_ru.txt",
+    "ru": "dictionary_ru.txt",
+    "en": "dictionary_ru.txt",
 }
 
 AVAILABLE_DICT = {
-    "Complete russian": "dictionary_ru.txt",
-    "Sample": "dictionary_ru.txt"
+    "Complete russian": {
+        "file": "dictionary_ru.txt",
+        "subdicts": {
+            "easy": (5645, 1, 34),
+            "medium": (5645, 46, 12),
+            "hard": (5645, 75, 25),
+            "very_hard": (5645, 100, 25)
+        }
+    },
 }
 
 SIMPLE_DICT = {

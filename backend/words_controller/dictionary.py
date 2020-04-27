@@ -129,3 +129,8 @@ class DictionaryInstance:
 @singleton(DictionaryInstance)
 class Dictionary:
     pass
+
+
+@singleton(SimpleDictionary)
+class SimpleSingleDict:
+    pass
