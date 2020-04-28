@@ -45,7 +45,7 @@ def test_start_game(room):
     for i in range(10):
         room.join(f'usr{i}')
     room.make_offline("usr0")
-    settings = {"time": 50, "words": 100, "difficulty": 30, "dispersion": 40, "dict": "Sample"}
+    settings = {"time": 50, "words": 100, "difficulty": "medium", "dispersion": 40, "dict": "Sample"}
     room.start_game(settings)
     for i in range(1, 10):
         assert f'usr{i}' in room.players

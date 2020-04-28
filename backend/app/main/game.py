@@ -43,6 +43,12 @@ class GameController:
         self.status = "playing"
         shuffle(self.pool)
 
+    def get_pool_size(self) -> int:
+        if self.pool is None:
+            return 0
+        else:
+            return len(self.pool)
+
     def finish_round(self) -> None:
         """finish round"""
         if self.status != 'waiting_round':
