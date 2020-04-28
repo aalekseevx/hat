@@ -34,7 +34,7 @@
     dictionary: Словарь
     not_enough_online: "Вы же не собираетесь играть один, да?"
     statistics: Статистика
-    show_last: Показывать только статистику за последнюю игру
+    show_last: Статистика за последнюю игру
 </i18n>
 
 <template>
@@ -91,7 +91,10 @@
     </div>
     <b-field grouped group-multiline>
         <div class="control">
-            <b-switch v-model="show_last">{{ $t('show_last') }}</b-switch>
+            <div class="container">
+                <b-switch v-model="show_last"></b-switch>
+                {{ $t('show_last') }}
+            </div>
         </div>
     </b-field>
     <Statistics v-bind:data="show_last ? last_statistics : global_statistics"/>
@@ -147,6 +150,12 @@
                     30,
                     45,
                     60
+                ],
+                levels: [
+                    "easy",
+                    "medium",
+                    "hard",
+                    "very_hard"
                 ]
             }
         },
@@ -187,7 +196,6 @@
                 'room_members',
                 'room',
                 'dicts',
-                'levels',
                 'online',
                 'last_statistics',
                 'global_statistics'

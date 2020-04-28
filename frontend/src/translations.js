@@ -15,7 +15,8 @@ let i18n = new VueI18n({
                 room: "Комната",
                 difficulty: "Сложность",
                 words_per: "Количество слов",
-                time_per: "Время в секундах на итерацию"
+                time_per: "Время в секундах на итерацию",
+                dictionary: "Словарь"
             },
             validation: {
                 ...ru.messages,
@@ -29,7 +30,8 @@ let i18n = new VueI18n({
                 room: "Room",
                 difficulty: "Difficulty",
                 words_per: "Number of words",
-                time_per: "Time per iteration"
+                time_per: "Time per iteration",
+                dictionary: "Dictionary"
             },
             validation: {
                 ...en.messages,
