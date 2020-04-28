@@ -25,6 +25,10 @@ def get_simple_dict_(dict_name: str, numb: int, complexity: int, variation: int)
     return c_dict.create_simple_dictionary(numb, complexity, variation)
 
 
+def get_simple_dict_by_name(name: str) -> SimpleDictionary:
+    return SimpleDictionary(**{'filename': f"{app.instance_path}/dictionaries_data/{app.config['SIMPLE_DICT'][name]}"})
+
+
 @lru_cache(maxsize=None)
 def get_simple_dict(dict_name: str, subdict_name: str):
     return get_simple_dict_(dict_name, *app.config['AVAILABLE_DICT'][dict_name]['subdicts'][subdict_name])
