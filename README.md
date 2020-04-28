@@ -19,9 +19,7 @@ Information, connected to the MIPT Project description is located in [PROJECT.md
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4dfd3032ac3f42fb9633d42d3f0f6223)](https://www.codacy.com/manual/aalekseevx/mipt-tp-game?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aalekseevx/mipt-tp-game&amp;utm_campaign=Badge_Grade)
 [![codecov](https://codecov.io/gh/aalekseevx/mipt-tp-game/branch/master/graph/badge.svg)](https://codecov.io/gh/aalekseevx/mipt-tp-game)
 [![Documentation Status](https://readthedocs.org/projects/hat-online/badge/?version=latest)](https://hat-online.readthedocs.io/en/latest/?badge=latest)
-   
 
-## Ultra-Fast deployment
 
 ## Components description
 
@@ -54,15 +52,15 @@ Implementation deadline -- 28.04.2020
 Here Website design and its link with Backend are described.
 
 Patterns:
-- Commang
+- Command
 - Chain of Responsibility
 - Observer
+- Composite
 
 
 Stack
 - HTML
-- Bulma / CSS
-- JQuery / JS
+- Vue / Buefy / JS
 
 Status - Ready 
 
@@ -103,7 +101,7 @@ poetry run task flask
 ```bash
 cd frontend
 npm install
-npm run start
+npm run serve
 ```
 
 ## Running the tests
@@ -118,8 +116,8 @@ poetry run task test
 
 - [Flask](https://github.com/pallets/flask)
 - [SocketIO](https://github.com/socketio/socket.io)
-- [JQuery](https://github.com/jquery/jquery)
 - [Bulma](https://github.com/jgthms/bulma)
+- [Buefy](https://buefy.org)
 
 ## Authors
 ### Alekseev Aleksandr
