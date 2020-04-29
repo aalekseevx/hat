@@ -82,9 +82,7 @@ Estimated implementation deadline -- 28.04.2020
 Here is how to start app in docker, listening to port 8080.
 
 ```bash
-export DOCKER_CLI_EXPERIMENTAL=enabled
-docker swarm init
-docker app install aalekseevx/hat_app:latest -s port=8080 -s SECRET_KEY=my_secret
+docker-compose up -d
 ```
 
 ## Starting app outside container

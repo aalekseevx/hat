@@ -5,6 +5,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    restart: always
     command: gunicorn app.wsgi:app --bind 0.0.0.0:8000
     expose:
       - 8000
@@ -14,12 +15,14 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    restart: always
     volumes:
       - type: volume
         source: static_volume
         target: /usr/src/frontend/dist
   nginx:
     build: ./nginx
+    restart: always
     volumes:
       - type: volume
         source: static_volume
