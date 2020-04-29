@@ -5,7 +5,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    command: gunicorn app.wsgi:app
+    command: gunicorn app.wsgi:app --bind 0.0.0.0:8000
     expose:
       - 8000
     env_file:
@@ -24,8 +24,10 @@ services:
       - type: volume
         source: static_volume
         target: /dist
+    links:
+      - "web"
     ports:
-      - 1337:80
+      - 8080:80
     depends_on:
       - web
       - ui

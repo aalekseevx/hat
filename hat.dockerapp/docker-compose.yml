@@ -3,7 +3,7 @@ version: '3.7'
 services:
   web:
     image: aalekseevx/hat_backend
-    command: gunicorn main:app
+    command: gunicorn main:app --bind 0.0.0.0:8000
     expose:
       - 8000
   ui:
