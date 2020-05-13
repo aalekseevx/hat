@@ -11,6 +11,7 @@ import Policy from "@/views/Policy";
 Vue.use(Router);
 
 const router = new Router({
+    mode: "history",
     routes: [
         {
             path: '/',
