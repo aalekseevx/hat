@@ -28,7 +28,7 @@ AVAILABLE_DICT = {
             "hard": (5645, 75, 25),
             "very_hard": (5645, 100, 25)
         }
-    },
+    }
 }
 
 SIMPLE_DICT = {

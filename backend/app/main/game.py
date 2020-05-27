@@ -57,6 +57,10 @@ class GameController:
 
     def remove_word(self, verdict: str, screen_time: float) -> None:
         """remove word and and update statistics"""
+
+        if not self.pool or len(self.pool) == 0:
+            self.endgame()
+
         word = self.pool[0]
         self.last_statistics.add_result(self.queue[self.queue_id].explaining_user,
                                         self.queue[self.queue_id].guessing_user, word, verdict, screen_time)
@@ -66,7 +70,8 @@ class GameController:
             self.pool = self.pool[1:]
         if verdict in ['mistake', 'timeout']:
             self.finish_round()
-        if not self.pool:
+
+        if not self.pool or len(self.pool) == 0:
             self.endgame()
 
     def endgame(self) -> None:
@@ -75,6 +80,6 @@ class GameController:
         self.players = None
         self.word_dictionary = None
         self.settings = None
-        self.pool = None
+        self.pool = []
         self.queue = []
         self.queue_id = None
